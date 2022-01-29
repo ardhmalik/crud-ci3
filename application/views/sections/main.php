@@ -22,6 +22,7 @@
                     <th scope="col">Class</th>
                     <th scope="col">No Telp</th>
                     <th scope="col">Status</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -47,6 +48,12 @@
                     </td>
                     <td>
                         <?= $sw['status'] ?>
+                    </td>
+                    <td>
+                        <div class="btn-group btn-group-sm" role="group">
+                            <a href="<?= site_url('crud/edit/' .  $sw['id_siswa']) ?>" type="button" class="btn btn-warning">Edit</a>
+                            <a href="<?= site_url('crud/delete/' .  $sw['id_siswa']) ?>" type="button" class="btn btn-danger">Hapus</a>
+                        </div>
                     </td>
                 </tr>
                 <?php endforeach ?>

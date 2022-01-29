@@ -63,4 +63,53 @@ class Crud extends CI_Controller
 		$this->load->view('content/form_add', $data);
 		$this->load->view('sections/footer');
 	}
+
+	public function edit($id)
+	{
+		$data = [
+			'project'=>'Simple CRUD with Codeigniter 3.1.11',
+			'title'=>'Edit Data',
+			'siswa'=>$this->cmodel->getDataId($id)
+		];
+
+		if ($this->input->post()) {
+			$statusCheck = $this->input->post('status');
+			
+			if ($statusCheck == NULL) {
+				$status = 0;
+			} elseif ($statusCheck == 'on') {
+				$status = 1;
+			}
+			
+			$input = [
+				'nama'=>$this->input->post('nama'),
+				'jenis_kel'=>$this->input->post('gender'),
+				'alamat'=>$this->input->post('alamat'),
+				'kelas'=>$this->input->post('kelas'),
+				'telp'=>$this->input->post('telp'),
+				'status'=>$status
+			];
+
+			// var_dump($input);
+			// die;
+
+			$inProcess = $this->cmodel->update($id, $input);
+
+			if ($inProcess) {
+				redirect('crud');
+			} else {
+				redirect('crud/edit/' . $id);
+			}
+		}
+		
+		$this->load->view('sections/header', $data);
+		$this->load->view('content/form_edit', $data);
+		$this->load->view('sections/footer');
+	}
+
+	public function delete($id)
+	{
+		$this->cmodel->delete($id);
+		redirect('crud');
+	}
 }
