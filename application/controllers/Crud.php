@@ -18,6 +18,7 @@ class Crud extends CI_Controller
 		];
 
 		$this->load->view('sections/header', $data);
+		$this->load->view('sections/navbar', $data);
 		$this->load->view('sections/main', $data);
 		$this->load->view('sections/footer');
 	}
@@ -60,6 +61,7 @@ class Crud extends CI_Controller
 		}
 		
 		$this->load->view('sections/header', $data);
+		$this->load->view('sections/navbar', $data);
 		$this->load->view('content/form_add', $data);
 		$this->load->view('sections/footer');
 	}
@@ -103,6 +105,7 @@ class Crud extends CI_Controller
 		}
 		
 		$this->load->view('sections/header', $data);
+		$this->load->view('sections/navbar', $data);
 		$this->load->view('content/form_edit', $data);
 		$this->load->view('sections/footer');
 	}
