@@ -1,6 +1,3 @@
-</div>
-<!-- End Main -->
-
 <!-- Footer -->
 <footer class="bg-light text-center py-3 mt-5">
     <a href="https://github.com/ardhmalik/sertifikasi-si">
