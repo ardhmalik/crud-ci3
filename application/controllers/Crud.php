@@ -6,15 +6,21 @@ class Crud extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->model('auth_model', 'amodel');
 		$this->load->model('crud_model', 'cmodel');
 	}
 	
 	public function index()
 	{
+		$sessions = [
+			'email'=>$this->session->userdata('email')
+		];
+
 		$data = [
 			'project'=>'Simple CRUD with Codeigniter 3.1.11',
 			'title'=>'Home',
-			'siswa'=>$this->cmodel->getData()
+			'siswa'=>$this->cmodel->getData(),
+			'user'=>$this->amodel->getUser($sessions['email'])
 		];
 
 		$this->load->view('sections/header', $data);

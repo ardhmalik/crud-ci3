@@ -49,10 +49,10 @@ class Auth_model extends CI_Model
         return $sql;
     }
     
-    public function getData()
+    public function getUser($email)
     {
-        $sql = $this->db->get('user');
-        $query = $sql->result_array();
+        $sql = $this->db->get_where('user', ['email'=>$email]);
+        $query = $sql->row_array();
 
         return $query;
     }

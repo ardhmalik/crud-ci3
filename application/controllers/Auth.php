@@ -26,13 +26,48 @@ class Auth extends CI_Controller
 			$this->load->view('auth/login', $data);
 			$this->load->view('sections/footer');
 		} else {
-			// $input = [
-			// 	'email'=>htmlspecialchars($this->input->post('email', true)),
-			// 	'password'=>password_hash($this->input->post('password'), PASSWORD_DEFAULT),
-			// ];
+			$this->_login();
+		}
+	}
 
-			// var_dump($input);
-			// die;
+	private function _login()
+	{
+		$data = [
+			'email'=>$this->input->post('email'),
+			'password'=>$this->input->post('password')
+		];
+		$user = $this->auth_model->getUser($data['email']);
+
+		// var_dump($user);
+		// die;
+
+		if ($user) {
+			if (password_verify($data['password'], $user['password'])) {
+				$data = [
+					'email'=>$user['email'],
+					'username'=>$user['username']
+				];
+
+				$this->session->set_userdata($data);
+				redirect('crud');
+			} else {
+				$this->session->set_flashdata(
+					'message',
+					'<div class="alert alert-danger" role="alert">
+						Wrong password bro, try again!
+					</div>'
+				);
+				redirect('auth/login');
+			}
+		} else {
+			$this->session->set_flashdata(
+				'message',
+				'<div class="alert alert-danger" role="alert">
+					Email isn`t registered, please 
+					<a href="'.site_url('auth/register').'">Register here</a>
+				</div>'
+			);
+			redirect('auth/login');
 		}
 	}
 	
@@ -72,7 +107,7 @@ class Auth extends CI_Controller
 				Your account has been registered, Please Login.
 				</div>'
 			);
-			redirect('auth/login');
+			redirect('auth/login', 'refresh');
 		}
 	}
 }
