@@ -10,7 +10,7 @@
                 echo date("H:i") . " WIB"; 
             ?>
              | 
-            <a href="">Logout</a>
+            <a href="<?= site_url('auth/logout') ?>">Logout</a>
         </div>
     </div>
 </nav>
